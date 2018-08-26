@@ -4,7 +4,7 @@ using Sellout;
 
 namespace SelloutTests.ParsingTests
 {
-    public class ProperVariableDeclarationTests
+    public class ProperVariableTests
     {
         Parser parser;
 
@@ -21,7 +21,7 @@ namespace SelloutTests.ParsingTests
         public void statement_include_variable_declaration(string name, string verb, decimal value)
         {
             var ast = parser.BuildAst(new[] {$"{name} {verb} {value}"});
-            Assert.That(ast.Statements.Single().ToString(), Is.EqualTo(new VariableDeclaration(name, value).ToString()));
+            Assert.That(ast.Statements.Single().ToString(), Is.EqualTo(new Variable(name, value).ToString()));
         }
     }
 }

@@ -20,3 +20,4 @@ packages/
 *ncrunch*
 .DS_Store
 enable-maintenance-mode
+sample/out

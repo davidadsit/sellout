@@ -4,7 +4,7 @@ using Sellout;
 
 namespace SelloutTests.ParsingTests
 {
-    public class CommonVariableDeclarationTests
+    public class CommonVariableTests
     {
         Parser parser;
 
@@ -23,7 +23,7 @@ namespace SelloutTests.ParsingTests
         public void statement_including_numberic_variable_declaration(string name, string verb, decimal value)
         {
             var ast = parser.BuildAst(new[] {$"{name} {verb} {value}"});
-            Assert.That(ast.Statements.Single().ToString(), Is.EqualTo(new VariableDeclaration(name, value).ToString()));
+            Assert.That(ast.Statements.Single().ToString(), Is.EqualTo(new Variable(name, value).ToString()));
         }
 
         [TestCase("a guitar", "is", "red")]
@@ -33,7 +33,7 @@ namespace SelloutTests.ParsingTests
         public void statement_including_string_variable_declaration(string name, string verb, string value)
         {
             var ast = parser.BuildAst(new[] {$"{name} {verb} \"{value}\""});
-            Assert.That(ast.Statements.Single().ToString(), Is.EqualTo(new VariableDeclaration(name, value).ToString()));
+            Assert.That(ast.Statements.Single().ToString(), Is.EqualTo(new Variable(name, value).ToString()));
         }
 
         [TestCase("a guitar", "is", "true", true)]
@@ -47,7 +47,7 @@ namespace SelloutTests.ParsingTests
         public void statement_including_boolean_variable_declaration(string name, string verb, string value, bool expected)
         {
             var ast = parser.BuildAst(new[] {$"{name} {verb} {value}"});
-            Assert.That(ast.Statements.Single().ToString(), Is.EqualTo(new VariableDeclaration(name, expected).ToString()));
+            Assert.That(ast.Statements.Single().ToString(), Is.EqualTo(new Variable(name, expected).ToString()));
         }
     }
 }

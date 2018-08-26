@@ -2,9 +2,9 @@ using System.Globalization;
 
 namespace Sellout
 {
-    public class VariableDeclaration : Statement
+    public class Variable : Statement
     {
-        public VariableDeclaration(string name, dynamic value)
+        public Variable(string name, dynamic value)
         {
             Name = name;
             Value = value;

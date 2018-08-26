@@ -11,7 +11,7 @@ namespace Sellout
 
         public void DeclareVariable(string name, dynamic value)
         {
-            statements.Add(new VariableDeclaration(name, value));
+            statements.Add(new Variable(name, value));
         }
     }
 }
