@@ -42,7 +42,7 @@ namespace SelloutTests.CSharpWriterTests
             var programText = File.ReadAllText("test-project/Program.cs");
             Assert.That(programText.StartsWith(@"﻿using System;
 
-namespace console_template
+namespace Rockstar
 {
     class Program
     {

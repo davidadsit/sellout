@@ -49,13 +49,14 @@ namespace Sellout
         {
             File.WriteAllText($"{path}/Program.cs", @"﻿using System;
 
-namespace console_template
+namespace Rockstar
 {
     class Program
     {
         static void Main(string[] args)
         {
-            // C# transpiled from the source Rockstar by sellout");
+            // C# transpiled from the source Rockstar by sellout
+");
         }
 
         void WriteProgramStatements(string path)
@@ -72,7 +73,7 @@ namespace console_template
 
         public void AppendStatement(string statement)
         {
-            statements.AppendLine(statement);
+            statements.AppendLine($"            {statement}");
         }
     }
 }
