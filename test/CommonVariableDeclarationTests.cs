@@ -35,5 +35,19 @@ namespace SelloutTests
             var ast = parser.BuildAst(new[] {$"{name} {verb} \"{value}\""});
             Assert.That(ast.Statements.Single().ToString(), Is.EqualTo(new VariableDeclaration(name, value).ToString()));
         }
+
+        [TestCase("a guitar", "is", "true", true)]
+        [TestCase("the bananas", "are", "right", true)]
+        [TestCase("my guitar", "was", "yes", true)]
+        [TestCase("your fingers", "were", "ok", true)]
+        [TestCase("a guitar", "is", "false", false)]
+        [TestCase("the bananas", "are", "wrong", false)]
+        [TestCase("my guitar", "was", "no", false)]
+        [TestCase("your fingers", "were", "lies", false)]
+        public void statement_including_boolean_variable_declaration(string name, string verb, string value, bool expected)
+        {
+            var ast = parser.BuildAst(new[] {$"{name} {verb} {value}"});
+            Assert.That(ast.Statements.Single().ToString(), Is.EqualTo(new VariableDeclaration(name, expected).ToString()));
+        }
     }
 }
