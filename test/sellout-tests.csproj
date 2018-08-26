@@ -4,6 +4,10 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
 
     <IsPackable>false</IsPackable>
+
+    <AssemblyName>sellout-tests</AssemblyName>
+
+    <RootNamespace>SelloutTests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,6 +18,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\src\sellout.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="TranspilerTests\" />
   </ItemGroup>
 
 </Project>

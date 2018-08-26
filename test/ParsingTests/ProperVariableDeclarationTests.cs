@@ -2,7 +2,7 @@ using System.Linq;
 using NUnit.Framework;
 using Sellout;
 
-namespace SelloutTests
+namespace SelloutTests.ParsingTests
 {
     public class ProperVariableDeclarationTests
     {
