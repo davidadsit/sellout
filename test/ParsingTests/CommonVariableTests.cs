@@ -15,14 +15,27 @@ namespace SelloutTests.ParsingTests
         }
 
         [TestCase("a guitar", "is", 6)]
+        [TestCase("A guitar", "is", 6)]
         [TestCase("an apple", "is", 3.14)]
+        [TestCase("An apple", "is", 3.14)]
         [TestCase("the bananas", "are", 5)]
+        [TestCase("The bananas", "are", 5)]
         [TestCase("my guitar", "was", 1000)]
+        [TestCase("My guitar", "was", 1000)]
         [TestCase("your axe", "are", -12)]
+        [TestCase("Your axe", "are", -12)]
         [TestCase("your fingers", "were", 10)]
         public void statement_including_numberic_variable_declaration(string name, string verb, decimal value)
         {
             var ast = parser.BuildAst(new[] {$"{name} {verb} {value}"});
+            Assert.That(ast.Statements.Single().ToString(), Is.EqualTo(new Variable(name, value).ToString()));
+        }
+
+        [TestCase("your fingers", "were", "a lovestruck ladykiller", 100)]
+        [TestCase("A killer", "is", "on the loose", 235)]
+        public void statement_including_poetic_numberic_variable_declaration(string name, string verb, string poeticLiteral, decimal value)
+        {
+            var ast = parser.BuildAst(new[] {$"{name} {verb} {poeticLiteral}"});
             Assert.That(ast.Statements.Single().ToString(), Is.EqualTo(new Variable(name, value).ToString()));
         }
 

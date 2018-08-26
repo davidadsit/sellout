@@ -10,7 +10,7 @@ namespace Sellout
 
     public class Parser : IParser
     {
-        readonly Regex commonVariableDeclarationPattern = new Regex(@"(?<name>(a|an|the|my|your) [a-z]+) (is|are|was|were) (?<value>.+)", RegexOptions.Compiled);
+        readonly Regex commonVariableDeclarationPattern = new Regex(@"(?<name>(a|an|the|my|your|A|An|The|My|Your) [a-z]+) (is|are|was|were) (?<value>.+)", RegexOptions.Compiled);
         readonly Regex properVariableDeclarationPattern = new Regex(@"(?<name>[A-Z][a-z]+( [A-Z][a-z]+)*) (is|are|was|were) (?<value>.+)", RegexOptions.Compiled);
 
         public AbstractSyntaxTree BuildAst(string[] codeLines)
@@ -39,6 +39,8 @@ namespace Sellout
             if (new[] {"true", "right", "yes", "ok"}.Any(x => x == value)) return true;
             if (new[] {"false", "wrong", "no", "lies"}.Any(x => x == value)) return false;
             if (decimal.TryParse(value, out var decimalValue)) return decimalValue;
+
+            if( decimal.TryParse(string.Join("", value.Split(" ").Select(x => x.Length %10)), out var poeticDecimalValue)) return poeticDecimalValue;
 
             return null;
         }
