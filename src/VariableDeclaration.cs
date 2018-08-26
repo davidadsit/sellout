@@ -1,14 +1,16 @@
 namespace Sellout
 {
-    public struct VariableDeclaration : Statement
+    public class VariableDeclaration : Statement
     {
-        public VariableDeclaration(string name, object value)
+        public VariableDeclaration(string name, dynamic value)
         {
             Name = name;
             Value = value;
         }
 
         public string Name { get; }
-        public object Value { get; }
+        public dynamic Value { get; }
+
+        public override string ToString() => $"{Name} => {Value}";
     }
 }

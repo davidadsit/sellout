@@ -1,5 +1,5 @@
-using NUnit.Framework;
 using System.Linq;
+using NUnit.Framework;
 using Sellout;
 
 namespace SelloutTests
@@ -14,11 +14,16 @@ namespace SelloutTests
             parser = new Parser();
         }
 
-        [TestCase("a","guitar", 6)]
-        public void statement_include_variable_declaration(string article, string name, object initialValue)
+        [TestCase("a guitar", "is", 6)]
+        [TestCase("an apple", "is", 3.14)]
+        [TestCase("the banana", "are", 5)]
+        [TestCase("my guitar", "were", 1000)]
+        [TestCase("your axe", "are", -12)]
+        [TestCase("your fingers", "were", 10)]
+        public void statement_include_variable_declaration(string name, string verb, decimal value)
         {
-            var ast = parser.BuildAst(new []{$"{article} {name} is {initialValue}"});
-            Assert.That(ast.Statements.Single(), Is.EqualTo(new VariableDeclaration($"{article} {name}", initialValue)));
+            var ast = parser.BuildAst(new[] {$"{name} {verb} {value}"});
+            Assert.That(ast.Statements.Single().ToString(), Is.EqualTo(new VariableDeclaration(name, value).ToString()));
         }
     }
 }

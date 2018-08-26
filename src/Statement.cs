@@ -1,6 +1,6 @@
 namespace Sellout
 {
-    public interface Statement
+    public abstract class Statement
     {
         
     }

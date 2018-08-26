@@ -9,7 +9,7 @@ namespace Sellout
 
         public IEnumerable<Statement> Statements => statements.AsReadOnly();
 
-        public void DeclareVariable(string name, object value)
+        public void DeclareVariable(string name, dynamic value)
         {
             statements.Add(new VariableDeclaration(name, value));
         }
