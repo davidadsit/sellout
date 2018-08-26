@@ -10,7 +10,7 @@ namespace Sellout
 
     public class Parser : IParser
     {
-        readonly Regex commonVariableDeclarationPattern = new Regex(@"(?<name>(a|an|the|my|your) [a-z]+) (is|were|are) (?<value>.+)", RegexOptions.Compiled);
+        readonly Regex commonVariableDeclarationPattern = new Regex(@"(?<name>(a|an|the|my|your) [a-z]+) (is|are|was|were) (?<value>.+)", RegexOptions.Compiled);
        
         public AbstractSyntaxTree BuildAst(string[] codeLines)
         {

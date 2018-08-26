@@ -17,7 +17,7 @@ namespace SelloutTests
         [TestCase("a guitar", "is", 6)]
         [TestCase("an apple", "is", 3.14)]
         [TestCase("the banana", "are", 5)]
-        [TestCase("my guitar", "were", 1000)]
+        [TestCase("my guitar", "was", 1000)]
         [TestCase("your axe", "are", -12)]
         [TestCase("your fingers", "were", 10)]
         public void statement_include_variable_declaration(string name, string verb, decimal value)
