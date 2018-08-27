@@ -33,6 +33,7 @@ namespace SelloutTests.ParsingTests
 
         [TestCase("your fingers", "were", "a lovestruck ladykiller", 100)]
         [TestCase("A killer", "is", "on the loose", 235)]
+        [TestCase("My dreams", "were", "ice. A life unfulfilled; wakin' everybody up, taking booze and pills.", 3.1415926535)]
         public void statement_including_poetic_numberic_variable_declaration(string name, string verb, string poeticLiteral, decimal value)
         {
             var ast = parser.BuildAst(new[] {$"{name} {verb} {poeticLiteral}"});
