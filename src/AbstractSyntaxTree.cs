@@ -13,5 +13,10 @@ namespace Sellout
         {
             statements.Add(new Variable(name, value));
         }
+
+        public void LieToMe(string text)
+        {
+            statements.Add(new Comment(text));
+        }
     }
 }

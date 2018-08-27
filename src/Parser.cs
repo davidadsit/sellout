@@ -16,19 +16,28 @@ namespace Sellout
         readonly Regex properVariableDeclarationPattern =
             new Regex(@"(?<name>[A-Z][a-z]+( [A-Z][a-z]+)*) (is|are|was|were) (?<value>.+)", RegexOptions.Compiled);
 
+        readonly Regex commentPattern = new Regex(@"\((?<text>.+)\)", RegexOptions.Compiled);
+
         public AbstractSyntaxTree BuildAst(string[] codeLines)
         {
             var ast = new AbstractSyntaxTree();
             foreach (var codeLine in codeLines)
             {
-                if (commonVariableDeclarationPattern.IsMatch(codeLine))
+                var currentLine = codeLine.Trim();
+                if (commentPattern.IsMatch(currentLine))
                 {
-                    var match = commonVariableDeclarationPattern.Match(codeLine);
+                    var match = commentPattern.Match(currentLine);
+                    ast.LieToMe(match.Groups["text"].Value);
+                    currentLine = commentPattern.Replace(currentLine, "").Replace("()", "").Trim();
+                }
+                if (commonVariableDeclarationPattern.IsMatch(currentLine))
+                {
+                    var match = commonVariableDeclarationPattern.Match(currentLine);
                     ast.DeclareVariable(match.Groups["name"].Value, ParseValue(match.Groups["value"].Value));
                 }
-                else if (properVariableDeclarationPattern.IsMatch(codeLine))
+                else if (properVariableDeclarationPattern.IsMatch(currentLine))
                 {
-                    var match = properVariableDeclarationPattern.Match(codeLine);
+                    var match = properVariableDeclarationPattern.Match(currentLine);
                     ast.DeclareVariable(match.Groups["name"].Value, ParseValue(match.Groups["value"].Value));
                 }
             }
@@ -39,6 +48,7 @@ namespace Sellout
         static dynamic ParseValue(string value)
         {
             if (value.StartsWith('"') && value.EndsWith('"')) return value.Replace("\"", "");
+            if (new[] {"nothing", "nowhere", "nobody", "empty", "gone", "null"}.Any(x => x == value)) return 0;
             if (new[] {"true", "right", "yes", "ok"}.Any(x => x == value)) return true;
             if (new[] {"false", "wrong", "no", "lies"}.Any(x => x == value)) return false;
             if (decimal.TryParse(value, out var decimalValue)) return decimalValue;
